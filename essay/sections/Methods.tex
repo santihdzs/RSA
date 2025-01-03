@@ -1,0 +1,48 @@
+\section{RSA Algorithm}\label{sec:section3}
+
+RSA encryption involves three steps: key generation, encryption, and decryption. RSA relies on the practicality of finding three large positive integers $e$, $d$, and $n$, where $n$ is the product of two large prime numbers. The idea behind RSA is that by using modular exponentiation for any integer $m$ within a range, the following relation holds:
+
+$$(m^e)^d \equiv m \pmod{n}$$
+
+Here, the $\equiv$ symbol denotes modular congruence, meaning that both $(m^e)^d$ and $m$ are congruent $\pmod{n}$. Even when knowing $e$, $n$ or $m$, it can be extremely difficult to find $d$ without knowing $\lambda(n)$. The public key (represented by $n$ and $e$) can be known by anyone and is used to encrypt messages ($m$), while the private key ($d$) can be used to decrypt the message. The following explains all three steps used for RSA, along with an example using small primes.
+
+\subsection{Key Generation}\label{sec:section3.1}
+
+The keys for RSA are generated as follows:
+
+Firstly, two different large prime numbers, $p$ and $q$ are chosen, $n = pq$ is then calculated, $n$ is used as the modulus for both keys and is made public.
+
+Secondly, one calculates $\lambda (n)$, since $n = pq$, and $p$ and $q$ are prime, $\lambda(p)= \phi(p) = p-1$, and likewise $\lambda(q) = q-1$. Hence $\lambda(n) = lcm(p-1, q-1)$. $\lambda(n)$ is kept secret, and the lcm (least common multiple) can be calculated using the Euclidean algorithm since
+
+$$lcm(a,b)= \frac{\left| ab \right|}{gcd \left( a,b \right)}$$.
+
+Afterwards, an integer $e$ is chosen such that $2 < e < \lambda(n)$ and $\gcd(e, \lambda(n))=1$; meaning that $e$ and $\lambda(n)$ are coprime.
+
+\begin{itemize}
+  \item $e$ is then released as part of the public key.
+\end{itemize}
+
+Finally, $d$ is determined as $d \equiv e^{-1}\pmod{\lambda(n)}$; that is, $d$ is the modular multiplicative inverse of $e$ modulo $\lambda(n)$.
+
+\begin{itemize}
+  \item $d$ is kept secret as the \textit{private key exponent}.
+\end{itemize}
+
+The public key consists of the modulus $n$ and the encryption exponent $e$, while the private key consists of the decryption exponent $d$, which should be kept secret. $p$, $q$, and $\lambda(n)$ should all be discarded since they can all be used to calculate $d$, and aren't used in the encryption and decryption process.
+
+
+\subsection{Encryption}\label{sec:section3.2}
+
+To encrypt a text message $M$, $M$ has to be converted into an integer $m$ such that $0 \leq m < n $; this can be done by using an agreed-upon protocol known as a padding scheme, which maps each character to a number. Afterwards, the encrypted message $c$ can be calculated using public key $e$ such that 
+
+$$c \equiv m^e \pmod{n}$$.
+
+
+
+\subsection{Decryption}\label{sec:section3.3}
+
+$m$ can then be recovered from $c$, using private key $d$ by calculating
+
+$$c^d \equiv (m^e)^d \equiv m \pmod{n}$$
+
+Given $m$, the original message $M$ can then be recovered by reversing the padding scheme.

@@ -1,0 +1,42 @@
+\section{RSA Example}\label{sec:section5}
+
+Following the steps outlined in sections \ref{sec:section3} and \ref{sec:section4}, I calculate the following RSA example where $p=61$ and $q=53$. Firstly, I calculate the modulus $n$, where
+
+$$n = 61 \times 53 = 3233$$
+
+The next step is to calculate $\lambda(n)$ which can be done as follows
+
+$$\lambda (3233) = lcm (60,52) = 780$$
+
+This operation holds thanks to the mathematical concepts outlined in section \ref{sec:section2}, particularly Fermat's Little Theorem.
+I then choose any number $e$ where $2 < e < 780$ that is coprime to 780. I let $e=17$.
+Hence $d=413$, as 
+
+$$
+17^{779} \equiv 413 \pmod{780}
+$$
+
+Furthermore, $(17 \times 413) \equiv 1 \pmod{780}$. This leaves me with a public key ($n = 3233, e = 17$) and a private exponent ($n = 3233, d = 413$). In order to encrypt $m=2$, for example, I calculate
+
+$$c = 2^{17} \pmod{3233} = 1752$$.
+
+In other words
+
+$$2^{17} \equiv 1752 \pmod{3233}$$
+
+This is calculated using modular exponentiation, which is done by dividing $m^e$ $(2^{17} = 131,072)$ by the modulus $(3233)$.
+
+$$
+\frac{131,072}{3233} = 40 + 1752
+$$
+
+To decrypt $c = 1752$, I calculate
+
+$$1752^{413} \pmod{3233} = 2$$.
+
+Which can also be expressed as
+
+$$1752^{413} \equiv 2 \pmod{3233}$$
+
+This decryption calculation is also performed using modular exponentiation, however, this was calculated using code since performing these calculations manually is increadibly difficult, not to mention, inefficient.
+

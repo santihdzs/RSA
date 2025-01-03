@@ -1,0 +1,84 @@
+\documentclass[pdftex,12pt,a4paper]{article} 
+% margin size
+\usepackage[margin=1in]{geometry}
+
+% Math and algorithms
+\usepackage{amsmath,amssymb,amsthm,esint}  % For both in-line and equation mode
+\usepackage{bbm}
+\usepackage{mathdots}
+\usepackage{bm}
+\usepackage{algorithm}
+\usepackage{algorithmic} % Algorithm styles, need to be nested for the example shown
+\usepackage{aliascnt}
+\numberwithin{equation}{section} % Numbering of our equations per section
+\newtheorem{theorem}{Theorem}
+\newtheorem{definition}{Definition}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{remark}{Remark}
+
+\usepackage{setspace} %Spacing on the front page for crest and titles
+\usepackage[]{fncychap} % Styles can be Sonny, Lenny, Glenn, Conny, Rejne, Bjarne and Bjornstrup
+\usepackage[hyphens]{url} % Deals with hyphens in urls to make them clickable
+\usepackage{xcolor} % Great if you want coloured text
+
+% Figures
+\usepackage{wrapfig}
+\usepackage{graphicx} % Inserting images
+\graphicspath{ {../figures/} } 
+\usepackage{caption}
+\usepackage{float}
+
+% Tables
+\usepackage{tabularx}
+\usepackage{multirow} 
+\renewcommand{\arraystretch}{1.5}
+
+% Appendix
+\usepackage{appendix} 
+
+\usepackage{natbib}
+\usepackage{comment}
+
+% Tikz figures
+\usepackage{tikz}
+\newcommand{\ImageWidth}{14cm} 
+\usetikzlibrary{decorations.pathreplacing,positioning, arrows.meta} 
+
+% Fancy headers and footnotes
+\usepackage{fancyhdr}
+\usepackage[symbol]{footmisc}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}} 
+
+% Hyperlinks and auto-references
+\usepackage[hidelinks]{hyperref}  
+\def\sectionautorefname{Section}
+\def\appendixname{Appendix}
+\newcommand{\propositionautorefname}{Proposition}
+\newcommand{\definitionautorefname}{Definition}
+\newcommand{\corollaryautorefname}{Corollary}  
+
+\setlength{\footnotesep}{0.5cm}
+%%%%%%%%%%%%%%%%%%%%%%%%%% DOCUMENT STARTS %%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+\begin{document} 
+% Front page 
+\include{preamble/front-page}  
+\include{preamble/contents}
+
+% Sections
+\input{sections/Introduction}
+\input{sections/Model}
+\input{sections/Methods}
+\input{sections/Privatekey}
+\input{sections/RSA-Example}
+\input{sections/Comparison}
+\input{sections/Conclusion}
+
+\pagebreak
+
+\addcontentsline{toc}{section}{References}
+\bibliographystyle{apalike}
+\bibliography{references}
+
+\end{document}

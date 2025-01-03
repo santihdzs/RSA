@@ -1,0 +1,64 @@
+\section{Deriving Private Keys From Public Keys}\label{sec:section4}
+
+I could not find a reliable method to find a private key $d$ when generating RSA keys, so I decided to study the algebraic structure of the cryptosystem myself using group theory.
+
+First, I let group $G$ be the group with set of integers $\mathbb{Z}_n$ and binary operation $\psi$, with definition
+
+$$
+G^{\psi}_{n} = \{  \phi_{i} \mid \phi_{i} \in \mathbb{Z}_{n} \; \neq p,q \}.
+$$
+
+From definition, the group includes all totatives of $n$. Hence, the order of $G^{\psi}_{n} = \phi (n)$.
+
+The group uses the following operations
+
+\begin{align*}
+\psi : \quad &m \mapsto m^{e} \\
+\psi^{-1} : \quad &m \mapsto m^{d} 
+\end{align*}
+
+Using $\psi^{-1}$ it is possible to derive an expression for $d$ in terms of $e$.
+
+Since $\psi$ and $\psi^{-1}$ are inverse operations, we can derive the following properties
+
+\begin{align*}
+\psi (\psi^{-1}(m)) &= m \\
+\psi^{-1} (m)^{d} &= m \\
+(m^{e})^{d} &= m \\
+e \cdot d \equiv 1 &\equiv e^{\lambda(n)}\pmod{\lambda(n)} \tag{1} \label{eq:1}
+\end{align*}
+
+In addition, I applied $\psi$ $k$ times to uncover the cyclic order of the group using the Carmichael function. Since I know $\lambda(n)$ is the lowest integer that can exponentiate elements in $G^{\psi}_{n}$ to achieve modular congruence to $m$, I apply the operation $\psi$ $\lambda(n)$ times. In other words
+
+\begin{align*}
+\psi^{\lambda(n)}(m) \equiv m \tag{2} \label{eq:2}
+\end{align*}
+
+Using Property (\ref{eq:2}), I apply $\psi^{-1}$ on both sides 
+
+\begin{align*}
+\psi^{-1} (\psi^{\lambda(n)}(m)) &= \psi^{-1}(m) \\
+\psi^{\lambda(n)-1}(m) &\equiv m^{d} \tag{3} \label{eq:3}
+\end{align*}
+
+Using Property (\ref{eq:3}) I aim to find $d$ by expressing $\psi^{\lambda(n)-1}(m)$ which is the same as applying $\psi$ $\lambda(n)-1$ times thus,
+
+$$
+\left( (m^{e})^{e} \right) ^{ \iddots ^{\lambda(n)-1}} \equiv m^{d}
+$$
+
+From Property (\ref{eq:1}) we know that $e$ and $d$ are modular multiplicative inverses in $\pmod{\lambda(n)}$ thus, 
+
+\begin{align*}
+m^{e^{\lambda(n)-1}} \quad \equiv \quad &m^{d} \pmod{\lambda(n)} \\
+\log_{m} m^{e^{\lambda(n)-1}} \quad \equiv \quad &\log_{m} m^{d} \pmod{\lambda(n)} 
+\end{align*}
+
+This in turn leaves us with
+
+\begin{align*}
+e^{\lambda(n)-1} \equiv d \pmod{\lambda(n)} \tag{4} \label{eq:4}
+\end{align*}
+
+
+
